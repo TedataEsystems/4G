@@ -1,0 +1,89 @@
+<div class="search-div" fxLayout="row">
+    <mat-list-item class="header-tag" routerLink="/"> Home </mat-list-item>/
+    <!-- <mat-list-item class="header-tag" > DM VPN Request </mat-list-item>/ -->
+    <mat-list-item class="header-tag active" routerLink="#" > Logs</mat-list-item>
+
+</div>
+
+<!---->
+
+
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>
+            logs Details
+             
+        </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+<div class="search-div " fxLayout="row">
+   <!--create button-->
+   
+     <!--search text-->
+    <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()"> 
+       <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+        </button> 
+    </mat-form-field>
+     
+</div>
+  
+<div class="spinner" *ngIf="loading;else box">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+<ng-template #box>
+    <div class="example-container mat-elevation-z8" #TABLE>
+
+
+
+<mat-table [dataSource]="dataSource" #table  matSort (matSortChange)="sortData($event)" matSortActive="name" matSortDirection="asc" matSortDisableClear>
+
+
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="id"> {{element.id}} </mat-cell>
+    </ng-container> 
+     
+
+    <ng-container matColumnDef="desciption">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> desciption </mat-header-cell>
+        <mat-cell *matCellDef="let element" title="{{element.desciption}} " data-label="desciption"> {{element.desciption?.length>50?  (element.desciption | slice:0:50 )+' ...' :element.desciption }} </mat-cell>
+           
+    </ng-container>
+ 
+
+    <ng-container matColumnDef="tableName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Table Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="tableName"> {{element.tableName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actionType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Action Type </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="actionType"> {{element.actionType}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="userName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>User Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="userName"> {{element.userName}} </mat-cell>
+    </ng-container> 
+
+
+    <ng-container matColumnDef="creationDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Creation Date</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="creationDate"> {{element.creationDate | date:'medium'}} </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+   
+
+</mat-table>
+<!-- end test -->
+</div>
+
+</ng-template>
+
+<mat-paginator [pageSizeOptions]="[25, 50, 100]"   [pageSize]="25" (page)="pageChanged($event)"  showFirstLastButtons></mat-paginator>
+
+</mat-card>

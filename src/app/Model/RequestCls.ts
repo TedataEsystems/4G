@@ -1,0 +1,64 @@
+export class RequestCls {
+    id: number=0;
+    creationDate?: Date ;
+    modificationDate?: Date ;
+    createdBy?: string;
+    userGroup?: string;
+    modifyiedBy?: string;
+    isDeleted?: boolean;
+    isnew?: boolean=false;
+    isEnabled?: boolean;//isnew
+    customerConnectionRequestType?: string;
+    customerName?: string;
+    ecrmNumberSample?: string;
+    noOfSIMs?: string;
+    tunnelWANIpAddressFromCustomer?: string;
+    requestedQuota?: string;
+    oldECRMNumber?: string;
+    vrfDetails?: string;
+    casePeriority?: string;
+    loopbackIPAddress?: string;
+    apnName?: string;
+    ipAllocationId?: number;
+    forecastId?: number;
+    billingApprovalConfirmationId?: number;
+    vrfId?: number;
+    statusId?: number;
+    vrfIdName?: any;
+    statusName?: any;
+    customerTestingTool?: any;
+    destinationIpOfCustomer?: any;
+    ipPool?: any;
+    requestType?: any;
+    customerNeedsSpecificPortOrAllowAnyId?: number;
+    customerNeedOneWayOrTwoWaysDirectionsId?: number;
+    customerNeedsSpecificPortOrAllowAnyName?: any;
+    customerNeedOneWayOrTwoWaysDirectionsName?: any;
+    ipAllocationName?: string;
+    forecastName?: string;    
+    new_OLd?: string;    
+    billingApprovalConfirmationIdName?: any;
+    //
+    contracttypeId?: number;
+    newoldId?: number;
+    usedTestSimDataSerialId?: number;
+    confirmedThatIpPoolNotDuplicatedId?: number;
+    confirmedTunnelIpNotDuplicatedId?: number;
+    confirmationSummaryApprovedFromCSTId?: number;
+    orderTypeId?: number;
+    confirmedIpPoolNotDuplicated?: any;
+    orderType?: any;
+    confirmedTunnelIpNotDuplicated?: any;
+    confirmationSummaryApprovedCST?: any;
+    testSimDataSerial?: any;
+    contractType?: any;
+    generalComment?: any;
+    mainOrder?: any;
+    backupMainOrder?: any;
+    forecastNumber?: any;
+    backupOrder?: any;
+    currentstatusId?: number;
+    currentStatus?: any;
+    poolDetails?: []=[];
+
+}

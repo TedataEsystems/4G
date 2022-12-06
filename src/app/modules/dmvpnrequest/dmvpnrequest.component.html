@@ -1,0 +1,227 @@
+
+<div class="search-div" fxLayout="row">
+    <mat-list-item class="header-tag" routerLink="/" > Home </mat-list-item>/
+    <!-- <mat-list-item class="header-tag" > DM VPN Request </mat-list-item>/ -->
+    <mat-list-item class="header-tag active" routerLink="/dmvpnrequest" > DMVPN Request</mat-list-item>
+
+</div>
+
+<!---->
+
+
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>DMVPN Request
+             
+        </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+<div class="search-div " fxLayout="row">
+   <!--create button-->
+    <button [hidden]="adminCreateflag" mat-raised-button (click)="onCreate()">
+        <mat-icon>add</mat-icon>Create
+    </button>
+     <!--search text-->
+    <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()"> 
+       <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+        </button> 
+    </mat-form-field>
+     
+</div>
+  
+<div class="spinner" *ngIf="loading;else box">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+<ng-template #box>
+    <div class="example-container mat-elevation-z8" #TABLE>
+
+
+
+<mat-table [dataSource]="dataSource" #table  matSort (matSortChange)="sortData($event)" matSortActive="name" matSortDirection="asc" matSortDisableClear>
+
+
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="id"> {{element.id}} </mat-cell>
+    </ng-container> 
+    <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+        <mat-cell *matCellDef="let row" data-label="action">
+          
+            <button mat-button (click)="onEdit(row)">
+                <mat-icon title="edit">launch</mat-icon>
+            </button>
+            <button [hidden]="adminflag" mat-button color="warn" (click)="onDelete(row)">
+                <mat-icon title="delete">delete_outline</mat-icon>
+            </button>
+
+        </mat-cell>
+
+    </ng-container>
+    <ng-container  matColumnDef="sim">
+        <mat-header-cell [hidden]="simflag" *matHeaderCellDef> SIMS</mat-header-cell>
+        <mat-cell [hidden]="simflag" *matCellDef="let row" data-label="sim">
+            <button mat-button (click)="onEditReq(row)">
+              <mat-icon class="text-success">create</mat-icon>
+            </button>
+            SIMs
+        </mat-cell> 
+
+    </ng-container>
+    <ng-container matColumnDef="customerConnectionRequestType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Connection Request Type </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="customerConnectionRequestType"> {{element.customerConnectionRequestType}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="customerName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="customerName"> {{element.customerName}} </mat-cell>
+    </ng-container>
+ 
+    <ng-container matColumnDef="orderTypeId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Order is main or backup  </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="orderTypeId"> {{element.orderType}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="mainOrder">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Main Order  </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="mainOrder"> {{element.mainOrder}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="backupMainOrder">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Backup Main Order   </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="backupMainOrder"> {{element.backupMainOrder}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="backupOrder">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Backup Order  </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="backupOrder"> {{element.backupOrder}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ipAllocationId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Ip Allocation </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="ipAllocationId"> {{element.ipAllocationName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="forecastId"> 
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Forecast </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="forecastId"> {{element.forecastName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="forecastNumber"> 
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Forecast Number </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="forecastNumber"> {{element.forecastNumber}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="noOfSIMs">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> No Of SIMs </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="noOfSIMs"> {{element.noOfSIMs}} </mat-cell>
+    </ng-container>
+   
+    <ng-container matColumnDef="tunnelWANIpAddressFromCustomer">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tunnel WANIp Address  </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="tunnelWANIpAddressFromCustomer"> {{element.tunnelWANIpAddressFromCustomer}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="confirmedTunnelIpNotDuplicatedId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Confirmed Tunnel Ip Not Duplicated  </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="confirmedTunnelIpNotDuplicatedId"> {{element.confirmedTunnelIpNotDuplicated}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="requestedQuota">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Requested Quota </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="requestedQuota"> {{element.requestedQuota}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="billingApprovalConfirmationId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Billing Confirmation </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="billingApprovalConfirmationId"> {{element.billingApprovalConfirmationIdName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="vrfId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> vrf </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="vrfId"> {{element.vrfIdName}} </mat-cell>
+    </ng-container> 
+
+    <ng-container matColumnDef="oldECRMNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Old ECRM Number </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="oldECRMNumber"> {{element.oldECRMNumber}} </mat-cell>
+    </ng-container>
+   
+    <ng-container matColumnDef="contracttypeId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Contract Type </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="contracttypeId"> {{element.contractType}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="casePeriority">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Case Periority </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="casePeriority"> {{element.casePeriority}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="vrfDetails">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> VRF Details  </mat-header-cell>
+        <mat-cell *matCellDef="let element" title="{{element.vrfDetails}} " data-label="vrfDetails"> {{element.vrfDetails?.length>50?  (element.vrfDetails | slice:0:50 )+' ...' :element.vrfDetails }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="loopbackIPAddress">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> loopback IP Address </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="loopbackIPAddress"> {{element.loopbackIPAddress}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="apnName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> APN Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="apnName"> {{element.apnName}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="currentstatusId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> status </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="currentstatusId"> {{element.currentStatus}} </mat-cell>
+    </ng-container>
+   
+    <ng-container matColumnDef="usedTestSimDataSerialId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Test Sim Data Serial </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="usedTestSimDataSerialId"> {{element.testSimDataSerial}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="generalComment">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> General Comment </mat-header-cell>
+        <mat-cell *matCellDef="let element" title="{{element.generalComment}}" data-label="generalComment"> {{element.generalComment?.length>50?  (element.generalComment | slice:0:50 )+' ...' :element.generalComment }} </mat-cell>
+    </ng-container>
+       
+<!--  -->
+<ng-container matColumnDef="creationDate"> 
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </mat-header-cell>
+    <mat-cell *matCellDef="let element" data-label="creationDate"> {{element.creationDate| date:'medium'}} </mat-cell>
+        </ng-container>
+       <ng-container matColumnDef="modificationDate"> 
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Modified Date </mat-header-cell>
+    <mat-cell *matCellDef="let element" data-label="modificationDate"> {{element.modificationDate| date:'medium'}} </mat-cell>
+        </ng-container>
+    <ng-container matColumnDef="createdBy"> 
+     <mat-header-cell *matHeaderCellDef mat-sort-header> CreatedBy </mat-header-cell>
+     <mat-cell *matCellDef="let element" data-label="createdBy"> {{element.createdBy}} </mat-cell>
+      </ng-container>
+     <ng-container matColumnDef="modifyiedBy"> 
+     <mat-header-cell *matHeaderCellDef mat-sort-header> ModifyiedBy </mat-header-cell>
+      <mat-cell *matCellDef="let element" data-label="modifyiedBy"> {{element.modifyiedBy}} </mat-cell>
+         </ng-container>
+     <ng-container matColumnDef="createdByTeam"> 
+      <mat-header-cell *matHeaderCellDef mat-sort-header> CreatedBy Team </mat-header-cell>
+     <mat-cell *matCellDef="let element" data-label="createdByTeam"> {{element.createdByTeam}} </mat-cell>
+     </ng-container>
+     <ng-container matColumnDef="modifyiedByTeam"> 
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ModifyiedBy Team </mat-header-cell>
+       <mat-cell *matCellDef="let element" data-label="modifyiedByTeam"> {{element.modifyiedByTeam}} </mat-cell>
+       </ng-container>
+<!--  -->
+    
+   
+  
+   
+   
+    <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+   
+
+</mat-table>
+<!-- end test -->
+</div>
+
+</ng-template>
+
+<mat-paginator [pageSizeOptions]="[25, 50, 100]"   [pageSize]="25" (page)="pageChanged($event)"  showFirstLastButtons></mat-paginator>
+
+</mat-card>

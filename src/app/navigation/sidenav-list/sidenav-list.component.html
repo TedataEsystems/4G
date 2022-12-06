@@ -1,0 +1,111 @@
+<!-- <mat-list>
+    <mat-list-item routerLink="/"  [ngStyle]="{ 'background-color':back ,'border-left':border }" (click)="onClick('hm')">
+        <mat-icon>home</mat-icon>
+        <span class="nav-caption">Home</span>
+    </mat-list-item>
+    <mat-list-item routerLink="/dmvpnrequest"  [ngStyle]="{ 'background-color':back1 ,'border-left':border1 }" (click)="onClick('dm')">
+        <mat-icon>cast_connected</mat-icon>
+        <span class="nav-caption">DMVPN Request</span>
+    </mat-list-item>
+    <mat-list-item routerLink="/pcconnectrequest" [ngStyle]="{'background-color':back2 ,'border-left':border2 }" (click)="onClick('pc')">
+        <mat-icon>connected_tv</mat-icon>
+        <span class="nav-caption">PC Connect Request</span>
+    </mat-list-item>
+    
+    <mat-list-item  routerLink="/logdata"  [ngStyle]="{ 'background-color':back3 ,'border-left':border3 }" (click)="onClick('log')">
+        <mat-icon>format_list_bulleted</mat-icon>
+        <span   class="nav-caption">Logs</span>
+    </mat-list-item>
+
+
+
+    <mat-list-item *ngIf='isesp'  (click)="show()" class="parent" [ngStyle]="{ 'background-color':back4 ,'border-left':border4 }" >
+        <mat-icon>settings</mat-icon>
+        <span class="full-width nav-caption" *ngIf="isExpanded || isShowing">Settings</span>
+       
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+    </mat-list-item>
+    <div class="submenu"  [hidden]='ishide'   [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+        
+        <span *ngFor="let vers of versions; index as i;" > 
+       <mat-list-item  routerLink="/settings" [queryParams]="{val: vers}" (click)="setTitle(vers)"><mat-icon>.</mat-icon> {{vers}}</mat-list-item>
+       </span>  
+    </div>
+    <mat-list-item  *ngIf='isesp'  (click)="showteam()" class="parent" [ngStyle]="{ 'background-color':back4 ,'border-left':border4 }" >
+        <mat-icon>groups</mat-icon>
+        <span class="full-width nav-caption" *ngIf="isExpandedT || isShowingT">Team Contacts</span>
+       
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenuT}" *ngIf="isExpandedT || isShowingT">expand_more</mat-icon>
+    </mat-list-item>
+    <div class="submenu"  [ngClass]="{'expanded' : showSubmenuT}" *ngIf="isShowingT || isExpandedT">
+        
+        <span *ngFor="let tm of teamlist; index as i;" > 
+       <mat-list-item  routerLink="/contacts" [queryParams]="{team: tm.id,name:tm.name}" (click)="setTitle(tm)"><mat-icon>.</mat-icon> {{tm.name}}</mat-list-item>
+       </span>   
+    </div> 
+
+  
+
+</mat-list> -->
+
+
+
+<mat-list>
+    <a mat-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" >
+        <mat-icon>home</mat-icon>
+        <span class="nav-caption">Home</span>
+    </a>
+    <a mat-list-item routerLink="/dmvpnrequest" routerLinkActive="active" >
+        <mat-icon>cast_connected</mat-icon>
+        <span class="nav-caption">DMVPN Request</span>
+    </a>
+    <a mat-list-item routerLink="/pcconnectrequest" routerLinkActive="active"  >
+        <mat-icon>connected_tv</mat-icon>
+        <span class="nav-caption">PC Connect Request</span>
+    </a>
+    <a mat-list-item   routerLink="/allSim" routerLinkActive="active"  >
+        <mat-icon>cast_connected</mat-icon>
+        <span class="nav-caption">SIMs</span>
+    </a>
+    <a mat-list-item   routerLink="/apnconclusion" routerLinkActive="active"  >
+        <mat-icon>connected_tv</mat-icon>
+        <span class="nav-caption">APN Conclusion</span>
+    </a>
+    <a mat-list-item  routerLink="/logdata" routerLinkActive="active"  >
+        <mat-icon>format_list_bulleted</mat-icon>
+        <span class="nav-caption">Logs</span>
+    </a>
+
+
+
+    <a mat-list-item *ngIf='isesp'  (click)="show()" class="parent" >
+        <mat-icon>settings</mat-icon>
+        <span class="full-width nav-caption" *ngIf="isExpanded || isShowing">Settings</span>
+       
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+    </a>
+    <div class="submenu" [hidden]='ishide' [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+       <a mat-list-item  routerLink="/CurrentStatus" routerLinkActive="active"  ><mat-icon>.</mat-icon>Current Status </a>
+       <a mat-list-item  routerLink="/ContractType" routerLinkActive="active"  ><mat-icon>.</mat-icon>Contract Type </a>
+       <a mat-list-item  routerLink="/APNWorkedFrom1stTest" routerLinkActive="active"  ><mat-icon>.</mat-icon>APN Worked From First Test </a>
+       <a mat-list-item  routerLink="/TestSimSerial" routerLinkActive="active"  ><mat-icon>.</mat-icon>Test Sim data Serial </a>
+   
+        <span *ngFor="let vers of versions; index as i;" > 
+       <a mat-list-item  routerLink="/settings" routerLinkActive="active" [queryParams]="{val: vers}" ><mat-icon>.</mat-icon> {{vers}}</a>
+       </span> 
+    </div>
+
+    <a mat-list-item  *ngIf='isesp'  (click)="showteam()" class="parent"   >
+        <mat-icon>groups</mat-icon>
+        <span class="full-width nav-caption" *ngIf="isExpandedT || isShowingT">Team Contacts</span>
+       
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenuT}" *ngIf="isExpandedT || isShowingT">expand_more</mat-icon>
+    </a>
+    <div class="submenu"  [ngClass]="{'expanded' : showSubmenuT}" *ngIf="isShowingT || isExpandedT">
+        
+        <span *ngFor="let tm of teamlist; index as i;" > 
+       <a mat-list-item  routerLink="/contacts" [queryParams]="{team: tm.id,name:tm.name}" (click)="setTitle(tm)"><mat-icon>.</mat-icon> {{tm.name}}</a>  
+       </span>   
+    </div> 
+
+</mat-list>

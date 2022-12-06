@@ -1,0 +1,210 @@
+
+<div class="search-div" fxLayout="row">
+    <mat-list-item class="header-tag" routerLink="/" > Home </mat-list-item>/
+    <mat-list-item class="header-tag" > APN Conclusion </mat-list-item>
+    
+</div>
+
+<!---->
+
+
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>APN Conclusion
+            <button class="gen-btn" mat-icon-button [matMenuTriggerFor]="menu"  matTooltip="Generate Report" matTooltipPosition="before" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+           </mat-card-title>
+       </mat-card-header>
+       <mat-divider></mat-divider>
+       <mat-menu #menu="matMenu">
+           
+           <button mat-menu-item (click)="exportExcel()" >
+             <mat-icon>file_upload</mat-icon>
+             <span>Export Excel</span>
+           </button>
+           
+         </mat-menu>
+     
+<div class="search-div " fxLayout="row">
+   <!--create button-->
+    <!-- <button [hidden]="adminflag" mat-raised-button (click)="onCreate()">
+        <mat-icon>add</mat-icon>Create
+    </button> -->
+     <!--search text-->
+    <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()"> 
+       <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+        </button> 
+    </mat-form-field>
+     
+</div>
+  
+<div class="spinner" *ngIf="loading;else box">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+<ng-template #box>
+    <div class="example-container mat-elevation-z8" #TABLE>
+
+
+
+<mat-table [dataSource]="dataSource" #table  matSort (matSortChange)="sortData($event)" matSortActive="name" matSortDirection="asc" matSortDisableClear>
+
+
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="id"> {{element.id}} </mat-cell>
+    </ng-container> 
+    <!-- <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+        <mat-cell *matCellDef="let row" data-label="action">
+          
+            <button mat-button (click)="onEdit(row)">
+                <mat-icon title="edit">launch</mat-icon>
+            </button>
+            <button [hidden]="adminflag" mat-button color="warn" (click)="onDelete(row)">
+                <mat-icon title="delete">delete_outline</mat-icon>
+            </button>
+
+        </mat-cell>
+
+    </ng-container> -->
+    <ng-container matColumnDef="requestId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Request Id </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="requestId"> {{element.requestId}} </mat-cell>
+    </ng-container>  
+    <ng-container matColumnDef="customerName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="customerName"> {{element.customerName}} </mat-cell>
+    </ng-container>
+ 
+
+    <ng-container matColumnDef="serviceTypeId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> service Type </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="serviceTypeId"> {{element.serviceTypes}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="new_old">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> new_Old </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="new_old"> {{element.new_old}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="apnName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>APN Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="apnName"> {{element.apnName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="vrfName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>VRF Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="vrfName"> {{element.vrfName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="usedTestSimDataSerialId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>  Used Test Sim Data Serial  </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="usedTestSimDataSerialId"> {{element.testSimDataSerial}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="receivingDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Receiving Date  </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="receivingDate"> {{element.receivingDate| date:'medium'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="sentToOperationDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Sent To Operation Date </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="sentToOperationDate"> {{element.sentToOperationDate| date:'medium'}} </mat-cell>
+    </ng-container>
+   
+
+    <ng-container matColumnDef="receivedFromOperationDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Received From Operation Date </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="receivedFromOperationDate"> {{element.receivedFromOperationDate| date:'medium'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="operationDuration">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Operation Duration  </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="operationDuration"> {{element.operationDuration}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="workingDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Working Date </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="workingDate"> {{element.workingDate| date:'medium'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="fullDuration">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>  Full Duration </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="fullDuration"> {{element.fullDuration}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="currentstatusId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Current status </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="currentstatusId"> {{element.currentStatus}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="apnWorkedFrom1stTestId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> APN Worked From 1st TestId </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="apnWorkedFrom1stTestId"> {{element.apnWorkedFrom1StTest}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="tunnelDST">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Sim Pool subnet / Tunnel subnet </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="tunnelDST"> {{element.tunnelDST}} </mat-cell>
+    </ng-container> 
+    <ng-container matColumnDef="loopBack">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Destination ip(s) / loopback IP </mat-header-cell>
+        <mat-cell *matCellDef="let element" title="{{element.loopBack}}" data-label="loopBack"> {{element.loopBack?.length>50?  (element.loopBack | slice:0:50 )+' ...' :element.loopBack }} </mat-cell>
+  
+    </ng-container> 
+    <ng-container matColumnDef="mainBackUp">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> main or BackUp </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="mainBackUp"> {{element.mainBackUp}} </mat-cell>
+    </ng-container> 
+    
+
+    <ng-container matColumnDef="comments">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> comments </mat-header-cell>
+        
+        <mat-cell *matCellDef="let element" title="{{element.comments}}" data-label="comments"> {{element.comments?.length>50?  (element.comments | slice:0:50 )+' ...' :element.comments }}  </mat-cell>
+
+    </ng-container> 
+     
+ 
+<!--  -->
+<ng-container matColumnDef="creationDate"> 
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </mat-header-cell>
+    <mat-cell *matCellDef="let element" data-label="creationDate"> {{element.creationDate| date:'medium'}} </mat-cell>
+        </ng-container>
+       <!-- <ng-container matColumnDef="modificatiocnDate"> 
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Modified Date </mat-header-cell>
+    <mat-cell *matCellDef="let element" data-label="modificatiocnDate"> {{element.modificationDate| date:'medium'}} </mat-cell>
+        </ng-container> -->
+    <ng-container matColumnDef="createdBy"> 
+     <mat-header-cell *matHeaderCellDef mat-sort-header> CreatedBy </mat-header-cell>
+     <mat-cell *matCellDef="let element" data-label="createdBy"> {{element.createdBy}} </mat-cell>
+      </ng-container>
+     <!-- <ng-container matColumnDef="modifyiedBy"> 
+     <mat-header-cell *matHeaderCellDef mat-sort-header> ModifyiedBy </mat-header-cell>
+      <mat-cell *matCellDef="let element" data-label="modifyiedBy"> {{element.modifyiedBy}} </mat-cell>
+         </ng-container> -->
+     <ng-container matColumnDef="createdByTeam"> 
+      <mat-header-cell *matHeaderCellDef mat-sort-header> CreatedBy Team </mat-header-cell>
+     <mat-cell *matCellDef="let element" data-label="createdByTeam"> {{element.createdByTeam}} </mat-cell>
+     </ng-container>
+     <!-- <ng-container matColumnDef="modifyiedByTeam"> 
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ModifyiedBy Team </mat-header-cell>
+       <mat-cell *matCellDef="let element" data-label="modifyiedByTeam"> {{element.modifyiedByTeam}} </mat-cell>
+       </ng-container> -->
+<!--  -->
+    
+   
+  
+   
+   
+    <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+   
+
+</mat-table>
+<!-- end test -->
+</div>
+
+</ng-template>
+
+<mat-paginator [pageSizeOptions]="[25, 50, 100]"   [pageSize]="25" (page)="pageChanged($event)"  showFirstLastButtons></mat-paginator>
+
+</mat-card>

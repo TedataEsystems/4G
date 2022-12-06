@@ -1,0 +1,514 @@
+
+ <div class="search-div" fxLayout="row">
+  <mat-list-item class="header-tag" routerLink="/" > Home </mat-list-item>/
+   <mat-list-item class="header-tag" routerLink="/dmvpnrequest">   DMVPN Request </mat-list-item>/
+  <mat-list-item class="header-tag active" > Details</mat-list-item>
+
+</div>
+
+
+
+
+<mat-card class="example-card">
+  <mat-card-header>
+      <mat-card-title>
+        DMVPN Request Details
+      </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+ 
+
+<mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+  <mat-tab label="EPM">
+    <form [formGroup]="service.form" (ngSubmit)="onSubmit()" class="normal-form" >
+      <mat-grid-list cols="2" rowHeight="450px" >
+        <mat-grid-tile>
+          <div class="controles-container"> 
+            
+            <input type="hidden" [value]="param1" id="reqId" formControlName="id">
+            <mat-form-field>
+              <input formControlName="customerName" [readonly]="epmFlag"  matInput [value]="reqval?.customerName"   placeholder="Customer Name*">       
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select formControlName="orderTypeId" (selectionChange)="onChange($event)" [disabled]="epmFlag" [value]="reqval?.orderTypeId" placeholder="Is Order Main or Backup ?">
+                <mat-option>None</mat-option>
+                <ng-container *ngFor="let item of ordertypeList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field [hidden]="mainflag" >         
+              <input formControlName="mainOrder" [readonly]="epmFlag"  matInput [value]="reqval?.mainOrder"   placeholder="Main Order ECRM *">       
+            </mat-form-field>
+            <!-- <mat-form-field [hidden]="backflag" >         
+              <input formControlName="backupMainOrder"  [readonly]="epmFlag"  matInput [value]="reqval?.backupMainOrder"   placeholder="Backup Main Order*">       
+            </mat-form-field  > -->
+            <mat-form-field [hidden]="backflag">         
+              <input formControlName="backupOrder"   [readonly]="epmFlag"  matInput [value]="reqval?.backupOrder"   placeholder="Backup Order ECRM *">       
+            </mat-form-field>
+    
+            <mat-form-field>
+              <input formControlName="noOfSIMs" [readonly]="epmFlag"  matInput [value]="reqval?.noOfSIMs" placeholder="NO Of SIMs*">
+              
+            </mat-form-field>
+          
+            <mat-form-field>
+              <mat-select formControlName="contracttypeId" [disabled]="epmFlag"   placeholder="contract type">
+                <mat-option value='null' >None</mat-option>
+                <ng-container *ngFor="let item of contractList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select> 
+            </mat-form-field> 
+            <mat-form-field>
+              <input formControlName="tunnelWANIpAddressFromCustomer" [readonly]="epmFlag" matInput [value]="reqval?.tunnelWANIpAddressFromCustomer" placeholder="Tunnel WAN IpAddress From Customer">
+            </mat-form-field>
+            <mat-checkbox *ngIf="iseditpage" [disabled]="epmFlag" formControlName="isnew"> Is new pool 
+            </mat-checkbox>
+             
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="controles-container">
+           
+          
+            <!-- <mat-checkbox *ngIf="iseditpage" [disabled]="epmFlag" formControlName="isnew"> Is new pool 
+            </mat-checkbox> -->
+            <mat-form-field>
+              <input formControlName="requestedQuota" [readonly]="epmFlag"  matInput [value]="reqval?.requestedQuota" placeholder="Requested Quota*">
+              
+            </mat-form-field>
+            <mat-form-field [hidden]="oldflag">
+              <input formControlName="oldECRMNumber" [readonly]="epmFlag"  matInput [value]="reqval?.oldECRMNumber" placeholder="Old VPN ECRM Number Sample*">
+              
+            </mat-form-field>
+          
+            <mat-form-field>
+              <mat-select formControlName="casePeriority" [disabled]="epmFlag" [value]="reqval?.casePeriority" placeholder="case Periority">
+                <mat-option>None</mat-option>
+                <ng-container *ngFor="let item of periorList">
+                  <mat-option [value]="item.value">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+      
+            <mat-form-field>
+              <mat-select formControlName="billingApprovalConfirmationId" [disabled]="epmFlag" [value]="reqval?.billingApprovalConfirmationId" placeholder="Billing Approval Confirmation">
+                <mat-option>None</mat-option>
+                <ng-container *ngFor="let item of confirmList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          
+          
+            
+         
+          </div>
+          
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2"  id="act-btn" >
+          <div class="button-row w-100" [hidden]="readonlyFlag">
+            <button mat-raised-button class="submit" type="submit" [disabled]="appear==true">   Submit</button>
+  
+            <button mat-raised-button color="warn" routerLink="/dmvpnrequest">Cancel</button>
+          </div>
+      </mat-grid-tile>
+       
+      </mat-grid-list>
+      
+    </form>
+
+  </mat-tab>
+  <mat-tab label="Presales">
+    
+    <form [formGroup]="service.form" (ngSubmit)="onSubmit()" class="normal-form" >
+      <mat-grid-list cols="2" rowHeight="250px" >
+        <mat-grid-tile>
+          <div class="controles-container"> 
+           
+            <input type="hidden" [value]="param1" id="reqId" formControlName="id">
+         
+            <!-- <mat-form-field>
+              <input formControlName="customerName" [readonly]="presalesFlag"  matInput [value]="reqval?.customerName"   placeholder="Customer Name*">       
+            </mat-form-field> -->
+            <mat-form-field>
+              <mat-select formControlName="ipAllocationId" [disabled]="saleFlag" [value]="reqval?.ipAllocationId" placeholder="Ip Allocation">
+                <mat-option>None</mat-option>
+                <ng-container *ngFor="let item of ipAllocatedList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+  
+           
+          
+           
+            <mat-form-field>
+              <mat-select formControlName="forecastId" [disabled]="saleFlag" [value]="reqval?.forecastId" placeholder="forecast">
+                <mat-option>None</mat-option>
+                <ng-container *ngFor="let item of forcastList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select>
+             
+            </mat-form-field>
+           
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="controles-container">
+              
+            <mat-form-field>
+              <input formControlName="forecastNumber" type="number" [readonly]="saleFlag" matInput   placeholder="forecast Number">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select formControlName="vrfId" [disabled]="saleFlag" (selectionChange)="applyselectpool($event.value)"  placeholder="VRF">
+                <mat-option value='null' >None</mat-option>
+                <ng-container *ngFor="let item of vrfList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select> 
+            </mat-form-field> 
+            
+
+          </div>
+          
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2"  id="act-btn" >
+          <div class="button-row w-100" [hidden]="readonlyFlag">
+            <button mat-raised-button class="submit" type="submit" [disabled]="appear==true">  Submit</button>
+  
+            <button mat-raised-button color="warn" routerLink="/dmvpnrequest">Cancel</button>
+          </div>
+      </mat-grid-tile>
+       
+      </mat-grid-list>
+      
+    </form>
+    
+    
+    
+   </mat-tab>
+
+   <mat-tab label="ESP">
+    
+    <form [formGroup]="service.form" (ngSubmit)="onSubmit()"  class="normal-form" >
+      <mat-grid-list cols="2" rowHeight="290px" >
+        <mat-grid-tile>
+          <div class="controles-container"> 
+          
+            <input type="hidden" [value]="param1" id="reqId" formControlName="id">
+           
+            <mat-form-field appearance ="fill">
+              <textarea formControlName="vrfDetails" [readonly]="espFlag" rows="4" matInput [value]="reqval?.vrfDetails" placeholder = "VRF Details"></textarea>
+           </mat-form-field>
+           
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="controles-container">
+             
+            <mat-form-field>
+              <mat-select formControlName="usedTestSimDataSerialId" [disabled]="espFlag"    placeholder="Test Sim Data Serial">
+                <mat-option value='null' >None</mat-option>
+                <ng-container *ngFor="let item of simtestList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select> 
+            </mat-form-field> 
+            <mat-form-field>
+              <mat-select formControlName="confirmedTunnelIpNotDuplicatedId" [disabled]="espFlag" [value]="reqval?.confirmedTunnelIpNotDuplicatedId" placeholder="confirmed Tunnel Ip Not Duplicated">
+                <mat-option>None</mat-option>
+                <ng-container *ngFor="let item of confirmtunnelList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field> 
+            <mat-form-field>
+              <mat-select formControlName="newoldId" [disabled]="espFlag" [value]="reqval?.newoldId" placeholder="New Old">
+                <mat-option>None</mat-option>
+                <ng-container *ngFor="let item of newOldList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field> 
+          </div>
+          
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2"  id="act-btn" >
+          <div class="button-row w-100" [hidden]="readonlyFlag">
+            <button mat-raised-button class="submit" type="submit" [disabled]="appear==true"> Submit</button>
+  
+            <button mat-raised-button color="warn" routerLink="/dmvpnrequest">Cancel</button>
+          </div>
+      </mat-grid-tile>
+       
+      </mat-grid-list>
+      
+    </form>
+    
+  </mat-tab>
+  <mat-tab label="Operation">
+    <form [formGroup]="service.form" (ngSubmit)="onSubmit()"  class="normal-form" >
+      <mat-grid-list cols="2" rowHeight="100px" >
+        <mat-grid-tile>
+          <div class="controles-container"> 
+            
+            <input type="hidden" [value]="param1" id="reqId" formControlName="id">
+            <mat-form-field>
+              <input formControlName="apnName" [readonly]="opFlag" matInput [value]="reqval?.apnName" placeholder="APN Name">
+            </mat-form-field>
+            </div>
+            
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <div class="controles-container"> 
+            
+             
+                <mat-form-field>
+                  <input formControlName="loopbackIPAddress" [readonly]="opFlag" matInput [value]="reqval?.loopbackIPAddress" placeholder="Loopback IP Address">
+                </mat-form-field>
+                </div>
+            </mat-grid-tile>
+         
+          <mat-grid-tile colspan="2"  id="act-btn" >
+            <div class="button-row w-100" [hidden]="readonlyFlag">
+              <button mat-raised-button class="submit" type="submit" [disabled]="appear==true">  Submit</button>
+    
+              <button mat-raised-button color="warn" routerLink="/dmvpnrequest">Cancel</button>
+            </div>
+        </mat-grid-tile>
+            </mat-grid-list>
+    </form>
+  </mat-tab>
+  
+  <mat-tab label="General">
+    <form [formGroup]="service.form" (ngSubmit)="onSubmit()"  class="normal-form" >
+      <mat-grid-list cols="2" rowHeight="300px" >
+        <mat-grid-tile>
+          <div class="controles-container"> 
+          
+            <input type="hidden" [value]="param1" id="reqId" formControlName="id">
+           
+            <mat-form-field>
+              <mat-select formControlName="currentstatusId"  [disabled]="readonlyFlag"  placeholder="Status">
+                <mat-option value='null' >None</mat-option>
+                <ng-container *ngFor="let item of statusList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select> 
+            </mat-form-field>  
+             
+           
+           
+           
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="controles-container">
+            <mat-form-field [hidden]="commentFlag" appearance = "fill">
+              <textarea formControlName="viewComment" rows="2" readonly matInput [value]="reqval?.generalComment" placeholder = "Comment"></textarea>
+           </mat-form-field>
+           
+           
+            <mat-form-field appearance = "fill">
+              <textarea formControlName="generalComment" rows="6" [readonly]='readonlyFlag'  matInput  placeholder = "general Comment"></textarea>
+           </mat-form-field>
+          </div>
+          
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2"  id="act-btn" >
+          <div class="button-row w-100" [hidden]="readonlyFlag" >
+            <button mat-raised-button class="submit" type="submit" [disabled]="appear==true">  Submit</button>
+  
+            <button mat-raised-button color="warn" routerLink="/dmvpnrequest">Cancel</button>   
+
+          </div>
+      </mat-grid-tile>
+       
+      </mat-grid-list>
+      
+    </form>
+
+  </mat-tab>
+
+
+
+
+</mat-tab-group>
+</mat-card>
+
+<!-- 
+
+
+   <form [formGroup]="service.form" (ngSubmit)="onSubmit()" class="normal-form" >
+    <mat-grid-list cols="2" rowHeight="800px" >
+      <mat-grid-tile>
+        <div class="controles-container">
+         
+
+          <input type="hidden" [value]="param1" id="reqId" formControlName="id">
+          <mat-form-field>
+            <input formControlName="customerName" [readonly]="epmFlag"  matInput [value]="reqval?.customerName"   placeholder="Customer Name*">       
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="orderTypeId" [disabled]="epmFlag" [value]="reqval?.orderTypeId" placeholder="Is Order Main or Backup ?">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let item of ordertypeList">
+                <mat-option [value]="item.id">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>         
+            <input formControlName="mainOrder" [readonly]="epmFlag"  matInput [value]="reqval?.mainOrder"   placeholder="Main Order*">       
+          </mat-form-field>
+          <mat-form-field>         
+            <input formControlName="backupMainOrder" [readonly]="epmFlag"  matInput [value]="reqval?.backupMainOrder"   placeholder="Backup Main Order*">       
+          </mat-form-field>
+          <mat-form-field>         
+            <input formControlName="backupOrder" [readonly]="epmFlag"  matInput [value]="reqval?.backupOrder"   placeholder="Backup Order*">       
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="ecrmNumberSample" [readonly]="epmFlag"  matInput [value]="reqval?.ecrmNumberSample" placeholder="Ecrm Number Sample">
+           
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="noOfSIMs" [readonly]="epmFlag"  matInput [value]="reqval?.noOfSIMs" placeholder="NO Of SIMs*">
+            
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="tunnelWANIpAddressFromCustomer" [readonly]="epmFlag" matInput [value]="reqval?.tunnelWANIpAddressFromCustomer" placeholder="Tunnel WAN IpAddress From Customer">
+          </mat-form-field>
+         
+           <mat-checkbox *ngIf="iseditpage" formControlName="isnew"> Is new pool 
+          </mat-checkbox>
+           
+          <mat-form-field>
+            <mat-select formControlName="confirmedTunnelIpNotDuplicatedId" [disabled]="espFlag" [value]="reqval?.confirmedTunnelIpNotDuplicatedId" placeholder="confirmed Tunnel Ip Not Duplicated">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let item of confirmtunnelList">
+                <mat-option [value]="item.id">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+         
+          <mat-form-field>
+            <mat-select formControlName="ipAllocationId" [disabled]="saleFlag" [value]="reqval?.ipAllocationId" placeholder="Ip Allocation">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let item of ipAllocatedList">
+                <mat-option [value]="item.id">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="apnName" [readonly]="opFlag" matInput [value]="reqval?.apnName" placeholder="APN Name">
+          </mat-form-field>
+          <mat-form-field appearance = "fill">
+            <textarea formControlName="vrfDetails" [readonly]="espFlag"  matInput [value]="reqval?.vrfDetails" placeholder = "VRF Details"></textarea>
+         </mat-form-field>
+      
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="controles-container">
+        
+          <mat-form-field>
+            <input formControlName="requestedQuota" [readonly]="epmFlag"  matInput [value]="reqval?.requestedQuota" placeholder="Requested Quota*">
+            
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="oldECRMNumber" [readonly]="epmFlag"  matInput [value]="reqval?.oldECRMNumber" placeholder="Old ECRM Number *">
+            
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="casePeriority" [disabled]="epmFlag" [value]="reqval?.casePeriority" placeholder="case Periority">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let item of periorList">
+                <mat-option [value]="item.value">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+    
+          <mat-form-field>
+            <mat-select formControlName="billingApprovalConfirmationId" [disabled]="epmFlag" [value]="reqval?.billingApprovalConfirmationId" placeholder="Billing Approval Confirmation">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let item of confirmList">
+                <mat-option [value]="item.id">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="forecastId" [disabled]="saleFlag" [value]="reqval?.forecastId" placeholder="forecast">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let item of forcastList">
+                <mat-option [value]="item.id">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+           
+          </mat-form-field>  
+          <mat-form-field>
+            <input formControlName="forecastNumber" type="number" [readonly]="epmFlag" matInput [value]="reqval?.forecastNumber" placeholder="forecast Number">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="vrfId" [disabled]="saleFlag"   placeholder="VRF">
+              <mat-option value='null' >None</mat-option>
+              <ng-container *ngFor="let item of vrfList">
+                <mat-option [value]="item.id">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select> 
+          </mat-form-field>  
+          
+            <mat-form-field>
+              <mat-select formControlName="currentstatusId"    placeholder="Status">
+                <mat-option value='null' >None</mat-option>
+                <ng-container *ngFor="let item of statusList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select> 
+            </mat-form-field>  
+            <mat-form-field>
+              <mat-select formControlName="contracttypeId" [disabled]="epmFlag"   placeholder="contract type">
+                <mat-option value='null' >None</mat-option>
+                <ng-container *ngFor="let item of contractList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select> 
+            </mat-form-field> 
+            <mat-form-field>
+              <mat-select formControlName="usedTestSimDataSerialId" [disabled]="espFlag"    placeholder="Test Sim Data Serial">
+                <mat-option value='null' >None</mat-option>
+                <ng-container *ngFor="let item of simtestList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select> 
+            </mat-form-field> 
+         
+          <mat-form-field>
+            <input formControlName="loopbackIPAddress" [readonly]="opFlag" matInput [value]="reqval?.loopbackIPAddress" placeholder="Loopback IP Address">
+          </mat-form-field>
+
+          <mat-form-field appearance = "fill">
+            <textarea formControlName="generalComment"   matInput [value]="reqval?.generalComment" placeholder = "General Comment"></textarea>
+         </mat-form-field>
+        
+        </div>
+        
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2"  id="act-btn" >
+        <div class="button-row w-100">
+          <button mat-raised-button class="submit" type="submit" [disabled]="appear==true">  <img src="../../../assets/image/lod.gif" #loading id="loading"> Submit</button>
+          <a mat-raised-button color="warn" routerLink="/dmvpnrequest">Cancel</a>
+        </div>
+    </mat-grid-tile>
+   
+     
+    </mat-grid-list>
+    
+  </form>
+ -->
+ <div id="loading" #loading1 style="display:none;">
+  <div>
+      <img src="../../../assets/image/cylinder.gif" height="350" width="350">
+  </div>
+</div>

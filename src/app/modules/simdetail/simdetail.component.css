@@ -1,0 +1,11 @@
+.button-row{
+    text-align: end;
+}
+.submit{
+    color:#fff;
+    background-color: slategray;
+    width: 100px;
+}
+/* img{
+    display: none;
+} */

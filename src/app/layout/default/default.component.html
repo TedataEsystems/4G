@@ -1,0 +1,30 @@
+<!-- <mat-sidenav-container>
+   
+    <mat-sidenav #sidenav rol="navigation">
+        <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+        <main>
+         
+            <router-outlet>
+            </router-outlet>
+      
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container> -->
+<app-header (sidenavToggle)="onToolbarMenuToggle()"></app-header>
+<mat-sidenav-container>
+ 
+    <mat-sidenav mode="side" #sidenav id="sidenav" [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen" opened>
+        <app-sidenav-list></app-sidenav-list>
+    </mat-sidenav>
+    <mat-sidenav-content  [ngStyle]="{ 'margin-left.px': contentMargin }">
+          <main>
+          
+        <router-outlet>
+        </router-outlet>
+ 
+    </main>
+</mat-sidenav-content>
+</mat-sidenav-container>

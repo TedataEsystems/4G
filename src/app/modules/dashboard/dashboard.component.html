@@ -1,0 +1,66 @@
+
+  <div class="row mx-0 pt-4">
+      <div class="col-sm-12 col-md-6">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title class="">
+                 <span class="text-left">DMVPN Request Status charts </span>  
+                 <span class="total float-right"  matBadgeColor="warn" matBadge="{{dmvpnCount}}" matBadgeOverlap="false">Total</span>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+           
+            <!-- <div class="chart-wrapper">
+                <canvas baseChart 
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [colors]="colors"
+                [chartType]="doughnutChartType">
+              </canvas>
+            </div> -->
+            <div class="chart-wrapper">
+          
+            <div class="smcard">
+              <p  *ngFor="let item of dmvpnlist;">
+                <span [matBadge]="item.value" matBadgeOverlap="false">{{item.key}}</span>
+                <mat-progress-bar   mode="determinate" [value]="item.value"></mat-progress-bar>
+              </p>
+             
+            </div>
+          </div>
+        </mat-card>
+
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title  class="">
+                    <span class="text-left">PC Connect Request Status charts</span>
+                   <span class="total float-right"  matBadgeColor="warn" matBadge="{{pcCount}}" matBadgeOverlap="false" >Total</span>
+                </mat-card-title>
+            </mat-card-header>
+        
+            <mat-divider></mat-divider>
+            <!-- <div class="chart-wrapper">
+                <canvas baseChart 
+                [data]="doughnutChartDatap"
+                [labels]="doughnutChartLabelsp"
+                [colors]="colors"
+                [chartType]="doughnutChartType">
+              </canvas>
+            </div> -->
+
+            <div class="chart-wrapper">
+          
+              <div class="smcard">
+  
+                <p  *ngFor="let item of pclist;">
+                  <span [matBadge]="item.value" matBadgeOverlap="false">{{item.key}}</span>
+                  <mat-progress-bar   mode="determinate" [value]="item.value"></mat-progress-bar>
+                </p>
+              </div>
+            </div>
+        </mat-card>
+      </div>
+  </div>
+     

@@ -1,0 +1,447 @@
+/* You can add global styles to this file, and also import other style files */
+*,::before,::after{
+    box-sizing: border-box;
+}
+html, body { height: 100%; margin: 0; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+button,[mat-icon-button]{
+    outline: none !important;
+}
+.generate{
+  width: 50%;
+  text-align: end;
+  padding-left: 10px;
+}
+.hide{
+    display: none;
+}
+/* mat-table */
+
+mat-footer-row mat-footer-cell{
+    justify-content: center;
+    font-style: italic;
+    text-align: center;
+    }
+  
+    /* filter search controls */
+.search-div{
+    margin: 20px 10px;
+    height:50px;
+} 
+
+.search-form-field{
+    width:30%;
+    /* margin-left: 10px; */
+    position: absolute !important;
+    right: 25px;
+    padding: 10px 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+
+}  
+.search-form-field div.mat-form-field-underline{
+    display: none;
+}
+.search-form-field div.mat-form-field-infix{
+    border-top: 0px;
+}
+.search-form-field div.mat-form-field-wrapper{
+   padding-bottom: 0px;
+}
+.search-form-field div.mat-form-field-suffix button{
+   width:32px;
+   height: 32px;
+ }
+  [matInput]{
+     background-color: transparent;
+     border: 0;
+ }
+ [matInput]:focus{
+     border: none;
+     outline: none;
+ }
+ 
+ form.normal-form{
+    margin: 10px;
+}
+
+.controles-container{
+    width: 100%;
+    padding: 5%;    
+}
+
+.controles-container > * {
+    width: 100%;
+    }
+
+    .add-bottom-padding{
+        padding-bottom: 10px;
+    }
+    /* radio group */
+mat-radio-group mat-radio-button{
+    margin-left: 5px;
+}
+
+.button-row button{
+    margin: 5px;
+}
+
+/* notification */
+snack-bar-container.success {
+    background-color: #5cb85c;
+    color : #fff;
+    height: 60px;
+  }
+
+  snack-bar-container.warn {
+    background-color: #f5290e;
+    color : #fff;
+    height: 60px;
+  }
+
+
+  snack-bar-container.notification simple-snack-bar{
+    font-size: 18px !important;
+    font-weight: bold;
+  }
+
+
+        /* for dialog pop-up */
+  .btn-dialog-close{
+    width: 45px;
+    min-width: 0px !important;
+    height: 40px;
+    padding: 0px !important;
+  }
+ 
+  .mat-toolbar{
+      background-color:transparent;
+  }
+
+
+
+        
+           /* mat-confirm-dialog (customised dialog) */
+           .confirm-dialog-container .mat-dialog-container {
+            border-radius: .25em .25em .4em .4em;
+            padding: 0px;
+        }
+        .confirm-dialog-container .content-container{
+            margin: 5px 5px 15px 5px;
+            color: #182940;
+            display: flex;
+        }
+        .confirm-dialog-container #close-icon{
+            margin-left: auto;
+            order: 2;
+            font-weight: bolder;
+        }
+        .confirm-dialog-container #close-icon:hover{
+        cursor: pointer;
+        }
+        
+        .confirm-dialog-container #no-button{
+        height: 40px;
+        width: 50%;
+        background-color: grey;
+        color:white;
+        border-radius: 0px;
+        }
+        
+        .confirm-dialog-container #yes-button{
+            height: 40px;
+            width: 50%;
+            background-color: #c71226;
+            color:white;
+            border-radius: 0px;
+        }
+        
+        .confirm-dialog-container span.content-span{
+            padding:  20px 13px;
+            text-align: left;
+            font-size: 17px;
+            font-family: 'Electrolize', sans-serif !important;
+        }
+
+
+       .cdk-global-overlay-wrapper .cdk-overlay-pane.modals-dialog{
+            position: absolute !important;
+            border-radius: 0!important;
+            right: 0;
+            top:0;
+            bottom:0;
+            max-width: 50%;
+        }
+
+        button:hover{
+            cursor: pointer;
+        }
+
+
+
+        /* table */
+
+
+
+        .example-container {
+          display: block;
+          width:100%;
+       overflow: auto; 
+       
+      }
+      .mat-table {
+        /* width: 100vw; */
+        width: 100%;
+        max-width: 100%;
+       
+        overflow: auto;
+        margin-bottom: 10px;
+        display: table;
+        border-collapse: collapse;
+       
+      }
+          th {
+            text-align: left;
+          }
+          th.mat-sort-header-sorted {
+            color: black;
+          }
+          .mat-table .mat-header-cell:last-of-type{
+            text-align:center;
+            padding-right: 0 !important;
+          }
+          td.mat-cell:last-of-type{
+            /* padding-right: 0 !important; */
+            display: flex;
+            /* text-align:center; */
+            /* width: 150px; */
+           
+          }
+        .mat-paginator{
+            margin-top: 10px;
+        }
+        .spinner{
+            width: 100%;
+           }
+           mat-spinner{
+             margin: 20px auto;
+           }
+           
+           
+           /* table responsive */
+           
+           @media screen and (max-width: 960px) {
+             .mat-table {
+               border: 0;
+               vertical-align: middle
+             }
+           
+             .mat-table caption {
+               font-size: 1em;
+             }
+             
+             /*  Enable this to hide header*/
+             .mat-table .mat-header-row{
+               display: none;
+             }
+             .mat-table .mat-header-cell {
+               
+               border: 10px solid;
+               clip: rect(0 0 0 0);
+               height: 1px;
+               margin: -1px;
+               padding: 0;
+               position: absolute;
+               width: 1px;
+             }
+             
+             .mat-table .mat-row {
+               border-bottom: 5px solid #ddd;
+               display: block;
+             }
+             /*
+             .mat-table .mat-row:nth-child(even) {background: #CCC}
+             .mat-table .mat-row:nth-child(odd) {background: #FFF}
+             */
+             .mat-table .mat-cell {
+               border-bottom: 1px solid #ddd;
+               display: block;
+               font-size: 1em;
+               text-align: right;
+               font-weight: bold;
+               height:30px;
+               /* margin-bottom: 2%; */
+               padding-right: 20px;
+             }
+             .mat-table .mat-cell:before {
+               /*
+               * aria-label has no advantage, it won't be read inside a table
+               content: attr(aria-label);
+               */
+               content: attr(data-label);
+               float: left;
+               text-transform: uppercase;
+               font-weight: normal;
+               font-size: .85em;
+               padding-left: 5px;
+               color:#182940;
+             }
+             .mat-table .mat-cell:last-child {
+               border-bottom: 0;
+             }
+               .mat-table .mat-cell:first-child {
+               margin-top:4%;
+             }
+             .mat-cell, .mat-header-cell,.mat-footer-cell{
+               width: 100% !important;
+               flex:1 !important;
+               border-bottom:1px solid #ececec !important;
+             }
+           }
+           .btn-color{
+            color: #fff;
+            background-color: slategray;
+            width: 100px;
+           }
+           mat-cell, mat-header-cell, mat-footer-cell{
+            word-wrap: break-word !important;
+            white-space: unset !important;
+            flex: 0 0 12% !important;
+            width: 12% ;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+          
+            word-break: break-word;
+          
+            -ms-hyphens: auto;
+            -moz-hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+            border-bottom:1px solid rgba(0,0,0,.12);
+            background-color: #fff;
+           }
+           mat-row, mat-header-row, mat-footer-row, th.mat-header-cell, td.mat-cell, td.mat-footer-cell{
+             border-bottom-width: 0px !important;
+           }
+           #sidenav.menu-close .mat-list-item mat-icon:first-of-type:not(.submenu mat-icon) {
+            margin-right: 20px !important;
+           
+          }
+          #sidenav.menu-close .submenu mat-icon {
+            margin-right: 40px !important;
+            /* overflow: hidden; */
+           
+          }
+          .mat-paginator-page-size{
+            margin-right: 0 !important;
+            position: absolute;
+            left: 20px;
+          }
+          .mat-card-title{
+            line-height: 2;
+          }
+          .mat-card-header,.mat-card-header-text, .mat-card-title{
+            width: 100%;
+          }
+          .mat-card-header .mat-card-title >button{
+            float: right;
+           
+          }
+          .header-tag{
+            font-size: 20px;
+             margin: 0 10px;
+           color: #9fa3a9;
+          }
+          .header-tag:hover{
+            cursor: pointer;
+           text-decoration: underline;
+          }
+          .active{
+            color:#182940;
+          }
+          #act-btn{
+            height:100px !important;
+          }
+/* html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+button:focus , a:focus , .mat-list-item:focus{
+  outline: none;
+  border: none;
+
+}
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: grey; 
+}
+.botttom-dialog-container{
+  position: absolute !important;
+  top: 5px !important;
+ width: 600px;
+ left: 22%;
+ height: 250px;
+ border-top-left-radius: 0px !important;
+ border-top-right-radius: 0px !important;
+ border-bottom-left-radius: 15px !important;
+ border-bottom-right-radius: 15px  !important;
+}
+
+  
+
+.mat-menu-panel{
+  max-height: 350px  !important;
+  max-width:450px !important;
+  overflow-wrap: break-word;
+} 
+a:hover{
+  text-decoration: none !important;
+}
+
+mat-icon:hover{
+  cursor:  pointer !important;
+}
+.mat-tab-nav-bar, .mat-tab-header{
+  border-bottom: 0 !important;
+}
+.mat-tab-label{
+  border-bottom: 1.5px solid #eee;
+}
+
+
+#loading {
+  position:fixed;
+  z-index: 999999;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(228 227 227 / 55%);
+
+}
+#loading div
+{
+  width: 350px;
+  height: 350px;
+  margin: 10% auto;
+}
+textarea{
+  resize: none !important;
+}

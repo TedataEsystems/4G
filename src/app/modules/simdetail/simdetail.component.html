@@ -1,0 +1,179 @@
+
+ <div class="search-div" fxLayout="row">
+  <mat-list-item class="header-tag" routerLink="/"> Home </mat-list-item>
+  <span *ngIf='pcflag'>/</span>
+    <mat-list-item *ngIf='pcflag' class="header-tag" routerLink="/pcconnectrequest"> PC Connect Request  </mat-list-item>/
+    <mat-list-item *ngIf='dmflag' class="header-tag" routerLink="/dmvpnrequest">   DMVPN Request </mat-list-item><span *ngIf='dmflag'>/</span>
+   
+  <mat-list-item class="header-tag" (click)="getsimdatalink()" >  Sim Data </mat-list-item>/
+  <mat-list-item class="header-tag active"  > details</mat-list-item>
+
+</div>
+
+<!---->
+
+
+<mat-card class="example-card">
+  <mat-card-header>
+      <mat-card-title>
+        Sim Data Details
+      </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+ <form [formGroup]="service.simform" (ngSubmit)="onSubmit()" class="normal-form" >
+    <mat-grid-list cols="2" rowHeight="610px" >
+      <mat-grid-tile>
+        <div class="controles-container">
+          <input type="hidden" [value]="param1" id="reqId" formControlName="id">
+       
+          <input type="hidden" [value]="param1" id="reqestId" formControlName="requestId">
+          <mat-form-field>
+            <mat-select formControlName="apnType"   [value]="reqval?.apnType" placeholder="APN Type">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let item of npatypeList">
+                <mat-option [value]="item.value">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select formControlName="simStatus"   [value]="reqval?.simStatus" placeholder="Sim Status">
+              
+              <ng-container *ngFor="let item of simStatuslist">
+                <mat-option [value]="item.value">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <input formControlName="orderID" matInput [value]="reqval?.orderID" placeholder="Order ID">
+           
+          </mat-form-field>
+                        
+          <mat-form-field>
+            <input formControlName="vrfName"   matInput [value]="reqval?.vrfName" placeholder="VRF Name">
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="simSerial"    matInput [value]="reqval?.simSerial" placeholder="SIM Serial *">
+            
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="imsiNumber"    matInput [value]="reqval?.imsiNumber" placeholder="IMSI Number *">
+            
+          </mat-form-field>
+            <mat-form-field>
+              <mat-select formControlName="problemId"   [value]="reqval?.problemId" placeholder="problem (If exist)">
+                <mat-option>None</mat-option>
+                <ng-container *ngFor="let item of probList">
+                  <mat-option [value]="item.id">{{item.value}}</mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          
+          <mat-form-field>
+            <mat-select formControlName="coreCommentId"   [value]="reqval?.coreCommentId" placeholder="core Comment">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let item of coreList">
+                <mat-option [value]="item.id">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field [hidden]="commentFlag" appearance = "fill">
+            <textarea formControlName="viewComment"  readonly matInput  placeholder = "Comment"></textarea>
+         </mat-form-field>
+          <mat-form-field appearance = "fill">
+            <textarea formControlName="comment"  matInput   placeholder = "general Comment"></textarea>
+         </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="controles-container">
+        
+ 
+          <mat-form-field>
+            <mat-select formControlName="new_OldId"   [value]="reqval?.new_OldId" placeholder="New or Old APN">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let item of npaList">
+                <mat-option [value]="item.id">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="customerName"  matInput [value]="reqval?.customerName"   placeholder="Customer Name*">       
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="simPoolSubnetTunnelSubnet"   matInput [value]="reqval?.simPoolSubnetTunnelSubnet" placeholder="sim Pool Subnet / Tunnel Subnet">
+           </mat-form-field>
+
+           <mat-form-field>
+            <mat-select formControlName="forecastId"   [value]="reqval?.forecastId" placeholder="forecast">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let item of foreList">
+                <mat-option [value]="item.id">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+
+           <mat-form-field *ngIf="dmflag" >
+            <input   formControlName="destinationIpsLoopbackIP"    matInput [value]="reqval?.destinationIpsLoopbackIP" placeholder=" Loopback IP*">
+            
+          </mat-form-field>
+          <mat-form-field  appearance = "fill" *ngIf="pcflag">
+            <mat-label>destination Ips</mat-label>
+            <textarea  formControlName="destinationIpsLoopbackIP"  matInput    ></textarea>
+            
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="dialNumber"    matInput [value]="reqval?.dialNumber" placeholder="Dial Number*">
+            
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="apnName"    matInput [value]="reqval?.apnName" placeholder="APN Name *">
+            
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="simipTunnelIp"    matInput [value]="reqval?.simipTunnelIp" placeholder="sim Ip /Tunnel Ip *">
+            
+          </mat-form-field>
+         
+          <mat-form-field>
+            <mat-select formControlName="consultancyCommentId"   [value]="reqval?.consultancyCommentId" placeholder="consultancy comment (Last status )">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let item of consultantList">
+                <mat-option [value]="item.id">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="epmCommentId"   [value]="reqval?.epmCommentId" placeholder="EPM Comment">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let item of epmList">
+                <mat-option [value]="item.id">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>  
+             
+        
+        </div>
+        
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2"  id="act-btn" >
+        <div class="button-row w-100">
+         
+          <button mat-raised-button class="submit" type="submit" [disabled]="appear==true">   Submit</button>
+
+          <a mat-raised-button color="warn" routerLink="/">Cancel</a>
+        </div>
+    </mat-grid-tile>
+     
+    </mat-grid-list>
+    
+  </form>
+  </mat-card>
+
+  <div id="loading" #loading1 style="display:none;">
+    <div>
+        <img src="../../../assets/image/cylinder.gif" height="350" width="350">
+    </div>
+</div>

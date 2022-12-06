@@ -1,0 +1,34 @@
+export class simdataModel {
+    id: number=0;
+    creationDate?: Date;
+    modificationDate?: Date;
+    createdBy?: string;
+    userGroup?: string;
+    modifyiedBy?: string;
+    requestId?: number;
+    apnType?: string;
+    simStatus?:string;
+    apnId?: number;
+    orderID?: string;
+    customerName?: string;
+    vrfName?: string;
+    simPoolSubnetTunnelSubnet?: string;
+    destinationIpsLoopbackIP?: string;
+    simSerial?: string;
+    dialNumber?: string;
+    imsiNumber?: string;
+    apnName?: string;
+    simipTunnelIp?: string;
+    problemId?: number;
+    coreCommentId?: number;
+    epmCommentId?: number;
+    consultancyCommentId?: number;
+    new_OldId?: number;
+    forecastId?: number;
+    percentageOfSimUsage?: any;
+    forecastPercentage?: any;
+    comment?: any;
+    forcastY?: any;
+    newOld?: any;
+    poold?: number;
+}

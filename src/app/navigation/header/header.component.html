@@ -1,0 +1,50 @@
+<mat-toolbar>
+    <div>
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <div>
+        <a routerLink="#" style="font-family: 'Black Ops One', cursive;font-size: 35px;"><img src="../../../assets/image/we.png" height="50" width="40"/>4G</a>
+    </div>
+   
+   
+    <div fxFlex fxLayout fxLayoutAlign="end" >
+        <ul fxLayout fxLayoutGap="15px" class="navigation.items">
+            <li>
+                <button mat-icon-button (click)="getNotify()" [matMenuTriggerFor]="notification">
+                     <mat-icon matBadge="{{readnum}}" matBadgeColor="warn">notifications_active</mat-icon>
+                </button>
+               
+                <mat-menu    #notification="matMenu">
+                    <span *ngFor="let item of notifies; index as i;">
+                       
+                    <button  mat-menu-item title="{{item.description}}">
+                        <mat-icon>notifications</mat-icon>{{item.description}} 
+                        {{item.creationDate | date:'medium'}}
+                     </button> 
+                     <span *ngIf="item.creationDate != null"   style="margin-left: 60px;" >
+                        {{item.creationDate | date:'medium'}}
+                     </span>
+                   
+                    <mat-divider></mat-divider>
+                    </span> 
+                </mat-menu> 
+            </li>
+            
+            <li>
+                <button mat-button [matMenuTriggerFor]="menu">
+                    <span>{{username}}</span> 
+                    <mat-icon> person_outline </mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                 
+                        <button mat-menu-item (click)="signOut()" routerLink="/login">
+                        <mat-icon>exit_to_app</mat-icon> Sign out
+                    </button>
+                </mat-menu>
+            </li>
+        </ul>
+    </div>
+
+</mat-toolbar>

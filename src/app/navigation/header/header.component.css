@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+a{
+    text-decoration: none;
+    color:white;
+}
+a:hover ,a:active{
+    color: lightgray;
+}
+li{
+    list-style: none;
+}
+ul{
+    margin-top:1rem !important;
+    display: flex;
+    flex-wrap: 15px;
+   
+ 
+}
+
+.navigation-items{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+mat-toolbar{
+    border-radius: 0px;
+    padding-left: 10px;
+    color:#fff;
+  background-color: #182940;
+}
+span{
+    font-family: 'Electrolize', sans-serif;
+    text-transform: capitalize;
+    font-weight: 700;
+   
+}
+
+.mat-menu-panel {
+    min-width: 112px;
+    max-width: 280px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - 48px);
+    border-radius: 4px;
+    outline: 0;
+    min-height: 64px;
+}
+.mat-menu-panel:first-of-type{
+    min-width: 250px;
+    max-width: 280px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - 48px);
+    border-radius: 4px;
+    outline: 0;
+    min-height: 64px;
+}
+.mat-menu-panel {
+    background: #fff;
+}
+.mat-elevation-z4 {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+
+
+
+
+@media(max-width: 959px){
+    mat-toolbar{
+        border-radius: 0px;
+    }
+}
