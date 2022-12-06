@@ -436,7 +436,7 @@ mat-icon:hover{
   background-color: rgb(228 227 227 / 55%);
 
 }
-#loading div
+/* #loading div
 {
   width: 350px;
   height: 350px;
@@ -444,4 +444,4 @@ mat-icon:hover{
 }
 textarea{
   resize: none !important;
-}
+} */
